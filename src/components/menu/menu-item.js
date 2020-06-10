@@ -8,7 +8,6 @@ export default class MenuItem extends Lightning.Component {
         };
     }
 
-
     set label(label) {
         this.text.text = label;
     }
