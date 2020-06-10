@@ -1,61 +1,86 @@
-import {Lightning} from "wpe-lightning-sdk";
+import { Lightning } from "wpe-lightning-sdk";
+import Item from "./item/Item";
 
 export default class List extends Lightning.Component {
     static _template() {
         return {
             Label: {
-                text: {text: '', fontFace: 'Magra'}
+                text: {text: '', fontFace: 'SourceSansPro-SemiBold'}
             },
-            Movies: {
-                y: 75
+            Items: {
+                y: 120
             }
         }
     }
 
-    _init() {
-        this._index = 0;
-    }
-
-    _handleLeft() {
-        // @todo: update index and call setIndex
-    }
-
-    _handleRight() {
-        // @todo: update index and call setIndex
-    }
-
-    setIndex(index) {
-        /**
-         * @todo:
-         * Implement working setIndex method
-         * that stores index and position movie component to focus
-         * on selected item
-         */
+    get visibleItemsNumber() {
+        return Math.floor(3000 / (this._itemSize.w + 100));
     }
 
     set label(v) {
-        // @todo: update list title
+        this.tag('Label').text = v;
     }
 
     set movies(v) {
-        // we add an array of object with type: Item
-        // this.tag("Levels").children = v.map((el, idx)=>{
-        //     return {
-        //         type: Item
-        //     };
-        // });
+        this.tag('Items').children = v.map((movie, index) => {
+            return {
+                type: Item,
+                x: index * (this._itemSize.w + 100),
+                item: movie,
+            }
+        });
     }
 
     get items() {
-        return this.tag("Levels").children;
+        return this.tag("Items").children;
     }
 
     get activeItem() {
-        // @todo: return selected item
+        return this.items[this._index];
+    }
+
+    _init() {
+        this._index = 0;
+        this._itemSize = {
+            w: 300,
+            h: 400
+        };
+        this._indexCounter = 0;
+    }
+
+    _handleLeft() {
+        if (this._index > 0) {
+            this.setIndex(this._index - 1);
+        }
+    }
+
+    _handleRight() {
+        if (this._index < this.items.length - 1) {
+            this.setIndex(this._index + 1);
+        }
     }
 
     _getFocused() {
-        // @todo:
-        // return activeItem
+        return this.activeItem;
+    }
+
+    setIndex(index) {
+        const previousIndex = this._index;
+        this._index = index;
+        if (index > previousIndex) {
+            if (this._indexCounter < this.visibleItemsNumber) {
+                this._indexCounter++;
+            }
+            if (this._indexCounter === this.visibleItemsNumber) {
+                this.tag('Items').setSmooth('x', -(index - this._indexCounter) * (this._itemSize.w + 100));
+            }
+        } else if (index < previousIndex) {
+            if (this._indexCounter > 0) {
+                this._indexCounter--;
+            }
+            if (this._indexCounter === 0) {
+                this.tag('Items').setSmooth('x', -index * (this._itemSize.w + 100));
+            }
+        }
     }
 }

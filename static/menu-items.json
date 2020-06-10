@@ -1,0 +1,27 @@
+[
+  {
+    "id": 0,
+    "label": "Movies",
+    "action": "moviesAction"
+  },
+  {
+    "id": 1,
+    "label": "Series",
+    "action": "seriesAction"
+  },
+  {
+    "id": 2,
+    "label": "Upcoming",
+    "action": "upcomingAction"
+  },
+  {
+    "id": 3,
+    "label": "Recordings",
+    "action": "recordingsAction"
+  },
+  {
+    "id": 4,
+    "label": "My List",
+    "action": "myListAction"
+  }
+]

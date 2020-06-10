@@ -1,37 +1,40 @@
-import {Lightning} from 'wpe-lightning-sdk';
-import {List} from "../components"
+import { Lightning, Router } from 'wpe-lightning-sdk';
+
+import { List, Logo } from "../components"
 
 export default class Main extends Lightning.Component{
     static _template() {
         return {
-            scale:0.5,
+            scale: 0.5,
             Lists: {
-                x: 100, y: 560, zIndex: 3
+                type: List,
+                x: 100,
+                y: 560,
+                zIndex: 3,
             },
-            // @todo: add logo
+            Logo: {
+                type: Logo,
+                x: 120,
+                y: 120
+            }
         };
     }
 
+    set movies(movies) {
+        this.tag('Lists').label = 'Popular';
+        this.tag('Lists').movies = movies.results;
+    }
+
     _init() {
-        this._index = 0; 
-    }
-
-    _focus() {
-
-    }
-
-    /**
-     * @todo: add set movies() that will be called by the data-provider
-     * inside set movies create new List child and call it's movies setter
-     * and hand over the movies
-     */
-
-    _unfocus() {
-        // @todo
+        this._index = 0;
+        this._getFocused();
     }
 
     _getFocused() {
-        // @todo: delegate focus to List child
+        return this.tag('Lists')
     }
 
+    _handleUp() {
+        Router.focusWidget('Menu')
+    }
 }

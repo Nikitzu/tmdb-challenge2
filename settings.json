@@ -4,7 +4,7 @@
       "clearColor": "0x00000000",
       "useImageWorker": true
     },
-    "debug": false,
+    "debug": true,
     "imageQuality": 90,
     "previewInterval": 3000,
     "previewDuration": 10000,

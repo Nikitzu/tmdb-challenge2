@@ -1,4 +1,4 @@
-import {Lightning, Utils, Router} from "wpe-lightning-sdk";
+import { Lightning, Utils, Router } from "wpe-lightning-sdk";
 
 export default class Splash extends Lightning.Component{
     static _template() {
@@ -8,23 +8,23 @@ export default class Splash extends Lightning.Component{
                 w: 1920, h: 1080, colorBottom: 0xff000000, scale: 1.2,
                 src: Utils.asset("images/background.png"),
                 transitions: {
-                    scale: {duration: 1, timingFunction},
-                    x:{duration:3, delay:1.2, timingFunction:'ease-in'}
+                    scale: { duration: 1, timingFunction },
+                    x:{ duration:3, delay:1.2, timingFunction:'ease-in' }
                 }
             },
             Logo: {
                 src: Utils.asset("images/logo-large.png"),
                 mount: .5, x: 960, y: 640, alpha: 0.0001,
                 transitions: {
-                    alpha: {duration: 1, timingFunction},
-                    y: {duration: 1, timingFunction}
+                    alpha: { duration: 1, timingFunction },
+                    y: { duration: 1, timingFunction }
                 }
             },
             Spinner: {
                 src: Utils.asset("images/spinner.png"),
                 mountX: .5, x: 960, y: 920, alpha: 0.001, color: 0xaaffffff,
                 transitions: {
-                    alpha: {duration: 1, timingFunction}
+                    alpha: { duration: 1, timingFunction }
                 }
             }
         };
@@ -33,8 +33,8 @@ export default class Splash extends Lightning.Component{
     _init() {
         this.tag("Logo").on("txLoaded", ()=> {
             this.patch({
-                Logo:{smooth:{alpha:1, y: 540}},
-                Background:{smooth:{scale:1}}
+                Logo:{ smooth:{ alpha:1, y: 540 }},
+                Background:{ smooth:{ scale:1 }}
             })
         });
 
@@ -42,8 +42,8 @@ export default class Splash extends Lightning.Component{
             this.tag("Spinner").setSmooth("alpha", 1);
         });
 
-        this._spinnerAnimation = this.animation({duration: 1, repeat: -1, actions: [
-            {t: 'Spinner', p: "rotation", sm: 0, v: function(t) {
+        this._spinnerAnimation = this.animation({ duration: 1, repeat: -1, actions: [
+            { t: 'Spinner', p: "rotation", sm: 0, v: function(t) {
                     if (t < .125) {
                         return 45 * (Math.PI/180);
                     } else if (t < .250) {
@@ -63,13 +63,11 @@ export default class Splash extends Lightning.Component{
                     }
                 }}
         ]});
+    }
 
-        /**
-         * @todo:
-         * Add _handleEnter(){}
-         * and on enter call Router.navigate("movies")
-         * to navigate to the correct route.
-         */
+    _handleEnter() {
+        Router.navigate('movies');
+        Router.widget('movies', ['Menu']);
     }
 
     _active() {
@@ -79,5 +77,4 @@ export default class Splash extends Lightning.Component{
     _inactive() {
         this._spinnerAnimation.stop()
     }
-
 }
