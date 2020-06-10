@@ -5,7 +5,7 @@ export default class Menu extends Lightning.Component {
     static _template() {
         return {
             MenuItems: {
-                children: []
+                children: [],
             }
         };
     }
@@ -24,7 +24,8 @@ export default class Menu extends Lightning.Component {
                 type: MenuItem,
                 action: item.action,
                 label: item.label,
-                x: idx * 250
+                x: idx * 250,
+                highlight: idx === 0
             };
         });
     }

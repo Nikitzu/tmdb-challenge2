@@ -27,7 +27,6 @@ export default class Main extends Lightning.Component{
 
     _init() {
         this._index = 0;
-        this._getFocused();
     }
 
     _getFocused() {

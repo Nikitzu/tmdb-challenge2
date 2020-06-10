@@ -21,6 +21,14 @@ export default class MenuItem extends Lightning.Component {
         return this._action;
     }
 
+    set highlight(v) {
+        if (v) {
+            this.patch({
+                smooth: { color: 0xffffffff, scale: 1.3 }
+            });
+        }
+    }
+
     _focus() {
         this.patch({
             smooth: { color: 0xffffffff, scale: 1.5 }
