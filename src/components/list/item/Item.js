@@ -7,8 +7,9 @@ export default class Item extends Lightning.Component{
             },
             Title: {
                 y: 420,
-                x: 20,
-                text: { fontFace: "SourceSansPro-Light.ttf", fontSize: 30 }
+                x: w => w/2,
+                text: { fontFace: "SourceSansPro-Light.ttf", fontSize: 30 },
+                mountX: 0.5,
             }
         }
     }
@@ -34,7 +35,7 @@ export default class Item extends Lightning.Component{
             }
         });
         this.tag('Image').src = `https://image.tmdb.org/t/p/w220_and_h330_face${v.poster_path}`;
-        this.tag('Title').text = this._shortTitle || this._fullTitle;
+        this.tag('Title').text.text = this._shortTitle || this._fullTitle || v.title;
     }
 
     _focus() {

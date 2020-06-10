@@ -48,7 +48,6 @@ export default class Menu extends Lightning.Component {
     _handleRight() {
         this._setIndex(Math.min(++this._index, this.items.length - 1));
     }
-
     _handleEnter() {
         this.signal('select', { item: this.activeItem });
     }

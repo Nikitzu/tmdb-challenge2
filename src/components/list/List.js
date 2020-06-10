@@ -18,7 +18,7 @@ export default class List extends Lightning.Component {
     }
 
     set label(v) {
-        this.tag('Label').text = v;
+        this.tag('Label').text.text = v;
     }
 
     set movies(v) {

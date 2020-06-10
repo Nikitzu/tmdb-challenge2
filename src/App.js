@@ -8,8 +8,9 @@ import { Menu } from "./components";
 export default class App extends Lightning.Component {
     static getFonts() {
         return [
-            { family: 'SourceSansPro-Regular', url: Utils.asset('fonts/SourceSansPro-Regular'), descriptors: {} } ,
-            { family: 'SourceSansPro-Bold', url: Utils.asset('fonts/SourceSansPro-Bold'), descriptors: {} }
+            { family: 'SourceSansPro-Regular', url: Utils.asset('fonts/SourceSansPro-Regular.ttf'), descriptors: {} } ,
+            { family: 'SourceSansPro-Bold', url: Utils.asset('fonts/SourceSansPro-Bold.ttf'), descriptors: {} },
+            { family: 'SourceSansPro-SemiBold', url: Utils.asset('fonts/SourceSansPro-SemiBold.ttf'), descriptors: {} }
         ];
     }
 

@@ -4,7 +4,8 @@ export default class MenuItem extends Lightning.Component {
     static _template() {
         return {
             color: 0xff52574f,
-            text: { text: '', fontFace: 'SourceSansPro-Regular', fontSize: 30 }
+            text: { text: '', fontFace: 'SourceSansPro-SemiBold', fontSize: 30 },
+            scale: 1
         };
     }
 
@@ -26,9 +27,15 @@ export default class MenuItem extends Lightning.Component {
         });
     }
 
-    _unfocus() {
-        this.patch({
-            smooth: { color: 0xff52574f, scale: 1 }
-        });
+    _unfocus(target, current) {
+        if(current.constructor.name === target.constructor.name) {
+            this.patch({
+                smooth: { color: 0xff52574f, scale: 1 }
+            });
+        } else {
+            this.patch({
+                smooth: { scale: 1.3 }
+            });
+        }
     }
 }
